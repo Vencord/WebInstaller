@@ -1,0 +1,233 @@
+/* https://www.figma.com/community/file/1252820362698249424 */
+
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/fira-mono/400.css';
+@import '@fontsource/fira-mono/500.css';
+
+:root {
+    --font: "Inter", sans-serif;
+    --font-mono: "Fira Mono", monospace;
+
+    /* Color */
+    --bg-0: #F9F5D7;
+    --bg-1: #F5EDCA;
+    --bg-2: #F2EAC7;
+    --bg-3: #F2E4BC;
+    --bg-4: #EFDFB7;
+    --bg-5: #EBDBB2;
+    --bg-dim: #F2EAC7;
+    --bg-current-word: #F2EAC7;
+    --bg-diff-green: #E4EDC7;
+    --bg-diff-green: #E4EDC7;
+    --bg-diff-blue: #E0E9D3;
+    --bg-diff-red: #F8E4C9;
+    --bg-visual-yellow: #F9E9BF;
+    --bg-visual-green: #DCE5C2;
+    --bg-visual-blue: #D8E1CC;
+    --bg-visual-red: #F0DDC3;
+    --bg-accent-yellow: #A96B2D;
+    --bg-accent-green: #6F8252;
+    --bg-accent-red: #AE5858;
+    --accent-red: #C14A4A;
+    --accent-orange: #C35E0A;
+    --accent-yellow: #B37109;
+    --accent-green: #6C782E;
+    --accent-aqua: #4B7A5D;
+    --accent-blue: #45707A;
+    --accent-purple: #945E80;
+    --fg-0: #644735;
+    --fg-1: #503829;
+    --grey-0: #A79A83;
+    --grey-1: #928374;
+    --grey-2: #7C6F64;
+
+    /* Text */
+    --display: 96px;
+    --headline-1: 64px;
+    --headline-2: 48px;
+    --headline-3: 40px;
+    --headline-4: 36px;
+    --headline-5: 32px;
+    --headline-6: 24px;
+    --body-lg: 20px;
+    --body-md: 16px;
+    --body-sm: 14px;
+    --body-xs: 12px;
+    --label-lg: 20px;
+    --label-md: 16px;
+    --label-sm: 14px;
+    --label-xs: 12px;
+    --overline-lg: 16px;
+    --overline-md: 14px;
+    --overline-sm: 12px;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-0: #1E2021;
+        --bg-1: #282828;
+        --bg-2: #282828;
+        --bg-3: #3C3836;
+        --bg-4: #3C3836;
+        --bg-5: #504944;
+        --bg-dim: #141617;
+        --bg-current-word: #32302F;
+        --bg-diff-green: #32361A;
+        --bg-diff-blue: #0D3138;
+        --bg-diff-red: #3C1F1E;
+        --bg-visual-yellow: #473C29;
+        --bg-visual-green: #333E34;
+        --bg-visual-blue: #2E3B3B;
+        --bg-visual-red: #442E2D;
+        --bg-accent-yellow: #D8A656;
+        --bg-accent-green: #A8B665;
+        --bg-accent-red: #EA6962;
+        --accent-red: #EA6962;
+        --accent-orange: #E78A4F;
+        --accent-yellow: #D8A656;
+        --accent-green: #A8B665;
+        --accent-aqua: #89B481;
+        --accent-blue: #7CAEA3;
+        --accent-purple: #D3859B;
+        --fg-0: #D4BE98;
+        --fg-1: #DDC7A0;
+        --grey-0: #7C6F64;
+        --grey-1: #918274;
+        --grey-2: #A79A83;
+    }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 600;
+    letter-spacing: -2%;
+}
+
+h1 {
+    font-size: var(--headline-1);
+}
+
+h2 {
+    font-size: var(--headline-2);
+}
+
+h3 {
+    font-size: var(--headline-3);
+}
+
+h4 {
+    font-size: var(--headline-4);
+}
+
+h5 {
+    font-size: var(--headline-5);
+}
+
+h6 {
+    font-size: var(--headline-6);
+}
+
+.body {
+    font-weight: 400;
+}
+
+.body.xs {
+    font-size: var(--body-xs);
+}
+
+.body.sm {
+    font-size: var(--body-sm);
+}
+
+.body.md {
+    font-size: var(--body-md);
+}
+
+.body.lg {
+    font-size: var(--body-lg);
+}
+
+.label {
+    font-weight: 600;
+    letter-spacing: 2%;
+}
+
+.label.xs {
+    font-size: var(--label-xs);
+}
+
+.label.sm {
+    font-size: var(--label-sm);
+}
+
+.label.md {
+    font-size: var(--label-md);
+}
+
+.label.lg {
+    font-size: var(--label-lg);
+}
+
+.overline {
+    font-weight: 500;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+}
+
+.overline.xs {
+    font-size: var(--overline-xs);
+}
+
+.overline.sm {
+    font-size: var(--overline-sm);
+}
+
+.overline.md {
+    font-size: var(--overline-md);
+}
+
+.overline.lg {
+    font-size: var(--overline-lg);
+}
+
+p,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+}
+
+button {
+    all: unset;
+}
+
+code {
+    display: inline-block;
+    background: var(--bg-0);
+    border: 1px solid var(--bg-current-word);
+    border-radius: 2px;
+    padding: .25em .5rem;
+    color: var(--grey-1);
+    font-family: var(--font-mono);
+    transform: translateY(-1px);
+}
+
+p {
+    margin-bottom: 0.5rem;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid var(--bg-3);
+    margin: 1.75rem 0;
+}
