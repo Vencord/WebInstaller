@@ -7,8 +7,7 @@
         "moduleResolution": "node",
         "strict": true,
         "noImplicitAny": false,
-        "target": "ESNEXT",
-        "baseUrl": "./src/"
+        "target": "ESNEXT"
     },
     "include": ["src/**/*", "vite.config.mts"]
 }

@@ -5,15 +5,10 @@
 -->
 
 <script lang="ts">
-    type Option = {
-        value: string;
-        label: string;
-        patched?: boolean;
-        tag?: string;
-    };
+    import type { DiscordInstall } from "../../webSocket/types";
 
-    export let options: Option[];
-    export let selected = options[0].value;
+    export let options: DiscordInstall[];
+    export let selected = options[0].path;
 
     const id = Math.floor(Math.random() * 100);
 </script>
@@ -22,18 +17,20 @@
     <div class="legend" id="label-patch">
         <h6>Please select an install to patch</h6>
     </div>
-    {#each options as { value, label, patched, tag }}
-        <div class="row" class:selected={selected === value}>
+    {#each options as { branch, path, isPatched }}
+        <div class="row" class:selected={selected === path}>
             <div class="radio-wrap">
-                <input type="radio" id={value} bind:group={selected} {value} />
+                <input type="radio" id={path} bind:group={selected} value={path} />
                 <span class="radio"><div class="check" /></span>
             </div>
-            {#if patched}
+            {#if isPatched}
                 <code class="overline sm patched">PATCHED</code>
             {/if}
-            <label for={value}>{label}</label>
-            {#if tag}
-                <code class="overline sm" class:stable={tag === "stable"} class:canary={tag === "canary"}>{tag}</code>
+            <label for={path}>{path}</label>
+            {#if branch}
+                <code class="overline sm" class:stable={branch === "stable"} class:canary={branch === "canary"}
+                    >{branch}</code
+                >
             {/if}
         </div>
     {/each}

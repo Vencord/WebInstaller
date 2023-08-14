@@ -6,11 +6,19 @@
 
 <script lang="ts">
     import Main from "./components/installer/Main.svelte";
+    import { readyStore } from "./webSocket";
+
+    $: ready = $readyStore;
 </script>
 
 <main>
     <h1>Vencord Installer</h1>
-    <Main />
+
+    {#if ready}
+        <Main />
+    {:else}
+        <p>no connection</p>
+    {/if}
 </main>
 
 <style>

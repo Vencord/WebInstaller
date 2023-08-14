@@ -5,25 +5,16 @@
 -->
 
 <script lang="ts">
+    import { sendMessage } from "../../webSocket";
+    import { type DiscordInstall, Op } from "../../webSocket/types";
     import PatchSelect from "../input/PatchSelect.svelte";
     import Actions from "./Actions.svelte";
 
     const userDataDir = "%APPDATA%\\Vencord";
 
-    let selectedPatch = "canary";
-    const patchOptions = [
-        {
-            value: "canary",
-            label: "%APPDATA%\\Local\\DiscordCanary",
-            tag: "canary"
-        },
-        {
-            patched: true,
-            value: "stable",
-            label: "%APPDATA%\\Local\\Discord",
-            tag: "stable"
-        }
-    ];
+    const installPromise = sendMessage<DiscordInstall[]>(Op.ListInstalls);
+
+    let selectedInstall = "";
 
     const currentVersion = "v1.2.6";
     const latestVersion = "v1.2.7";
@@ -51,7 +42,13 @@
             </div>
         </div>
         <hr />
-        <PatchSelect options={patchOptions} bind:selected={selectedPatch} />
+        {#await installPromise}
+            <p>Loading installs...</p>
+        {:then installs}
+            <PatchSelect options={installs} bind:selected={selectedInstall} />
+        {:catch error}
+            <p>Failed to load installs: {String(error)}</p>
+        {/await}
     </div>
 
     <Actions />
