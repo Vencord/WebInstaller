@@ -27,17 +27,13 @@
             }
         );
     }
+
+    $: shiggyUrl = `https://media.discordapp.net/stickers/1039992459209490513.png?passthrough=${shigging}`;
 </script>
 
 <main>
     <p class="points overline lg">{points} shiggies</p>
-    <button on:click={shig}>
-        <img
-            class="shiggy"
-            src="https://media.discordapp.net/stickers/1039992459209490513.png?passthrough={shigging}"
-            alt="shiggy"
-        />
-    </button>
+    <button class="shig" on:click={shig} style="background-image:url({shiggyUrl})" />
     <div class="spacer" />
     {#if points >= 100}
         <button class="shop" on:click={openShop}>Open shop?</button>
@@ -53,15 +49,16 @@
         gap: 2em;
         height: 100%;
         box-sizing: border-box;
+        user-select: none;
     }
     .spacer {
         flex: 1;
     }
-    .shiggy {
+    .shig {
         width: 8em;
         height: 8em;
         cursor: pointer;
-        user-select: none;
+        background-size: contain;
     }
 
     .shop {

@@ -10,7 +10,6 @@ import type { Constructor } from "type-fest";
 import ShiggyIcon from "../components/icons/ShiggyIcon.svelte";
 import VencordIcon from "../components/icons/VencordIcon.svelte";
 import Installer from "../components/installer/Installer.svelte";
-import ShiggyGame from "../components/shiggy/ShiggyGame.svelte";
 import { openWindow } from ".";
 
 export type Launcher = {
@@ -42,16 +41,18 @@ export const launchers: Launcher[] = [
         name: "Shiggy Clicker",
         icon: ShiggyIcon,
         onClick: () => {
-            openWindow(
-                ShiggyGame,
-                {},
-                {
-                    title: "Shiggy Clicker",
-                    icon: ShiggyIcon,
-                    width: 400,
-                    height: 500
-                }
-            );
+            import("../components/shiggy/ShiggyGame.svelte").then(({ default: ShiggyGame }) => {
+                openWindow(
+                    ShiggyGame,
+                    {},
+                    {
+                        title: "Shiggy Clicker",
+                        icon: ShiggyIcon,
+                        width: 400,
+                        height: 500
+                    }
+                );
+            });
         }
     }
 ];
