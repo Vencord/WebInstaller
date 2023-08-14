@@ -1,5 +1,4 @@
 /* eslint-disable spaced-comment */
-/* eslint-disable license-header/header */
 /*
  * SPDX-License-Identifier: GPL-3.0
  * Vinstaller, a cross platform gui/cli app for installing Vencord

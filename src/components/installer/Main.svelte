@@ -5,7 +5,7 @@
     const userDataDir = "%APPDATA%\\Vencord";
 
     let selectedPatch = "canary";
-    let patchOptions = [
+    const patchOptions = [
         {
             value: "canary",
             label: "%APPDATA%\\Local\\DiscordCanary",
@@ -19,8 +19,8 @@
         },
     ];
 
-    let currentVersion = "v1.2.6";
-    let latestVersion = "v1.2.7";
+    const currentVersion = "v1.2.6";
+    const latestVersion = "v1.2.7";
 </script>
 
 <section>
