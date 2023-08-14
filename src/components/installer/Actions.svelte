@@ -1,26 +1,24 @@
 <!--
-  Vencord Web Installer, a cross-platform gui/cli for injecting Vencord
+  Vencord WebInstaller, a web frontend for the Vencord Installer
   Copyright (c) 2023 Vendicated, Justice Almanzar and Vencord contributors
   SPDX-License-Identifier: GPL-3.0-or-later
 -->
 
-<div class="buttons">
-    <button class="btn label md install">Install</button>
-    <button class="btn label md update">Update</button>
-    <button class="btn label md uninstall">Uninstall</button>
-    <button class="btn label md openasar">Install OpenAsar</button>
-</div>
+<section>
+    <button class="label md install">Install</button>
+    <button class="label md repair">Repair</button>
+    <button class="label md uninstall">Uninstall</button>
+    <button class="label md openasar">Install OpenAsar</button>
+</section>
 
 <style>
-    .buttons {
+    section {
         display: flex;
         gap: 1rem;
         width: 100%;
     }
-    .buttons .btn {
+    button {
         flex: 1;
-    }
-    .btn {
         text-align: center;
         box-sizing: border-box;
         padding: 0.75rem 1rem;
@@ -29,16 +27,17 @@
         color: var(--bg-current-word);
         cursor: pointer;
     }
-    .btn.install {
+
+    .install {
         background-color: var(--accent-green);
     }
-    .btn.update {
+    .repair {
         background-color: var(--accent-blue);
     }
-    .btn.uninstall {
+    .uninstall {
         background-color: var(--accent-red);
     }
-    .btn.openasar {
+    .openasar {
         background-color: var(--bg-3);
         border: 1px solid var(--fg-0);
         color: var(--fg-1);

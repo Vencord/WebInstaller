@@ -44,24 +44,24 @@
     --grey-2: #7C6F64;
 
     /* Text */
-    --display: 96px;
-    --headline-1: 64px;
-    --headline-2: 48px;
-    --headline-3: 40px;
-    --headline-4: 36px;
-    --headline-5: 32px;
-    --headline-6: 24px;
-    --body-lg: 20px;
-    --body-md: 16px;
-    --body-sm: 14px;
-    --body-xs: 12px;
-    --label-lg: 20px;
-    --label-md: 16px;
-    --label-sm: 14px;
-    --label-xs: 12px;
-    --overline-lg: 16px;
-    --overline-md: 14px;
-    --overline-sm: 12px;
+    --display: 6rem;
+    --headline-1: 4rem;
+    --headline-2: 3rem;
+    --headline-3: 2.5rem;
+    --headline-4: 2.25rem;
+    --headline-5: 2rem;
+    --headline-6: 1.5rem;
+    --body-lg: 1.25rem;
+    --body-md: 1rem;
+    --body-sm: 0.875rem;
+    --body-xs: 0.75rem;
+    --label-lg: 1.25rem;
+    --label-md: 1;
+    --label-sm: 0.875rem;
+    --label-xs: 0.75rem;
+    --overline-lg: 1rem;
+    --overline-md: 0.875rem;
+    --overline-sm: 0.75rem;
 }
 
 @media (prefers-color-scheme: dark) {

@@ -1,7 +1,3 @@
 {
-    "recommendations": [
-        "dbaeumer.vscode-eslint",
-        "eamodio.gitlens",
-        "svelte.svelte-vscode"
-    ]
+    "recommendations": ["dbaeumer.vscode-eslint", "eamodio.gitlens", "svelte.svelte-vscode", "esbenp.prettier-vscode"]
 }

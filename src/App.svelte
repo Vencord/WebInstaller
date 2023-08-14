@@ -1,5 +1,5 @@
 <!--
-  Vencord Web Installer, a cross-platform gui/cli for injecting Vencord
+  Vencord WebInstaller, a web frontend for the Vencord Installer
   Copyright (c) 2023 Vendicated, Justice Almanzar and Vencord contributors
   SPDX-License-Identifier: GPL-3.0-or-later
 -->
@@ -9,7 +9,7 @@
 </script>
 
 <main>
-    <h2>Vencord Installer</h2>
+    <h1>Vencord Installer</h1>
     <Main />
 </main>
 
@@ -22,7 +22,7 @@
         justify-content: center;
         height: 100%;
     }
-    h2 {
+    h1 {
         color: var(--accent-purple);
     }
 </style>

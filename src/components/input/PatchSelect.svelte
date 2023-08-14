@@ -1,5 +1,5 @@
 <!--
-  Vencord Web Installer, a cross-platform gui/cli for injecting Vencord
+  Vencord WebInstaller, a web frontend for the Vencord Installer
   Copyright (c) 2023 Vendicated, Justice Almanzar and Vencord contributors
   SPDX-License-Identifier: GPL-3.0-or-later
 -->
@@ -18,12 +18,7 @@
     const id = Math.floor(Math.random() * 100);
 </script>
 
-<div
-    role="radiogroup"
-    class="container"
-    aria-labelledby="label-patch"
-    id={`group-${id}`}
->
+<div role="radiogroup" class="container" aria-labelledby="label-patch" id={`group-${id}`}>
     <div class="legend" id="label-patch">
         <h6>Please select an install to patch</h6>
     </div>
@@ -38,11 +33,7 @@
             {/if}
             <label for={value}>{label}</label>
             {#if tag}
-                <code
-                    class="overline sm"
-                    class:stable={tag === "stable"}
-                    class:canary={tag === "canary"}>{tag}</code
-                >
+                <code class="overline sm" class:stable={tag === "stable"} class:canary={tag === "canary"}>{tag}</code>
             {/if}
         </div>
     {/each}

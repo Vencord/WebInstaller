@@ -6,3 +6,5 @@ bracketSpacing: true
 arrowParens: avoid
 useTabs: false
 endOfLine: lf
+plugins:
+    - "prettier-plugin-svelte"

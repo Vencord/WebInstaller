@@ -2,7 +2,7 @@
     "compilerOptions": {
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
-        "lib": [ "DOM", "DOM.Iterable", "esnext", "esnext.array", "esnext.asynciterable", "esnext.symbol" ],
+        "lib": ["DOM", "DOM.Iterable", "esnext", "esnext.array", "esnext.asynciterable", "esnext.symbol"],
         "module": "commonjs",
         "moduleResolution": "node",
         "strict": true,
@@ -10,5 +10,5 @@
         "target": "ESNEXT",
         "baseUrl": "./src/"
     },
-    "include": [ "src/**/*", "vite.config.mts" ]
+    "include": ["src/**/*", "vite.config.mts"]
 }

@@ -1,5 +1,5 @@
 <!--
-  Vencord Web Installer, a cross-platform gui/cli for injecting Vencord
+  Vencord WebInstaller, a web frontend for the Vencord Installer
   Copyright (c) 2023 Vendicated, Justice Almanzar and Vencord contributors
   SPDX-License-Identifier: GPL-3.0-or-later
 -->
@@ -15,14 +15,14 @@
         {
             value: "canary",
             label: "%APPDATA%\\Local\\DiscordCanary",
-            tag: "canary",
+            tag: "canary"
         },
         {
             patched: true,
             value: "stable",
             label: "%APPDATA%\\Local\\Discord",
-            tag: "stable",
-        },
+            tag: "stable"
+        }
     ];
 
     const currentVersion = "v1.2.6";
@@ -32,13 +32,11 @@
 <section>
     <div>
         <p>
-            Files will be downloaded to <code class="overline sm"
-                >{userDataDir}</code
-            >
+            Files will be downloaded to <code class="overline sm">{userDataDir}</code>
         </p>
         <p>
-            To customize this location, set the environment variable <code
-                class="overline sm">VENCORD_USER_DATA_DIR</code
+            To customize this location, set the environment variable <code class="overline sm"
+                >VENCORD_USER_DATA_DIR</code
             > and restart me
         </p>
         <hr />
@@ -72,16 +70,16 @@
         align-items: center;
         justify-content: center;
     }
-    .installer .version {
+    .version {
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 0.1rem;
     }
-    .installer .current {
+    .current {
         color: var(--accent-purple);
     }
-    .installer .latest {
+    .latest {
         color: var(--accent-green);
     }
 </style>
