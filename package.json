@@ -4,7 +4,7 @@
     "private": true,
     "main": "index.js",
     "homepage": "https://vencord.dev/",
-    "license": "GPL-3.0",
+    "license": "GPL-3.0-or-later",
     "packageManager": "pnpm@8.6.11",
     "engines": {
         "node": ">=18",

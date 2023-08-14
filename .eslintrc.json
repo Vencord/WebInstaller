@@ -3,6 +3,7 @@
     "ignorePatterns": [ "dist", "node_modules" ],
     "plugins": [
         "@typescript-eslint",
+        "simple-header",
         "simple-import-sort",
         "unused-imports",
         "path-alias",
@@ -13,7 +14,6 @@
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "project": "tsconfig.json",
         "extraFileExtensions": [ ".svelte" ]
     },
     "overrides": [
@@ -26,8 +26,11 @@
             "rules": {
                 "simple-header/header": [ "error", {
                         "syntax": [ "<!--", "-->" ],
-                        "decor": [ "\n", "", "\n" ]
-                    } ]
+                        "decor": [ "\n", "  ", "\n" ],
+                        "files": [ "scripts/header.txt" ],
+                        "templates": { "author": [ ".*", "Vendicated, Justice Almanzar and Vencord contributors" ] }
+                    } ],
+                "prettier/prettier": "off"
             }
         }
     ],
@@ -40,11 +43,8 @@
     },
     "rules": {
         "simple-header/header": [ "error", {
-                "text": [
-                    "SPDX-License-Identifier: GPL-3.0",
-                    "Copyright (c) {year} {author}"
-                ],
-                "templates": { "author": [ "Vendicated", "Justice Almanzar", "Vencord contributors" ] }
+                "files": [ "scripts/header.txt" ],
+                "templates": { "author": [ ".*", "Vendicated, Justice Almanzar, and Vencord contributors" ] }
             } ],
         "eqeqeq": [ "error", "always", { "null": "ignore" } ],
         "spaced-comment": [ "error", "always", { "markers": [ "!" ] } ],
