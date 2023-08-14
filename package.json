@@ -4,7 +4,7 @@
     "private": true,
     "main": "index.js",
     "homepage": "https://vencord.dev/",
-    "license": "GPL-3.0",
+    "license": "GPL-3.0-or-later",
     "packageManager": "pnpm@8.6.11",
     "engines": {
         "node": ">=18",
@@ -13,7 +13,9 @@
     "scripts": {
         "dev": "vite dev",
         "build": "vite build",
-        "serve": "vite preview"
+        "serve": "vite preview",
+        "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.mts,.mjs",
+        "lint:fix": "pnpm lint --fix"
     },
     "dependencies": {
         "@fontsource-variable/inter": "^5.0.8",
@@ -22,7 +24,17 @@
     },
     "devDependencies": {
         "@sveltejs/vite-plugin-svelte": "^2.4.5",
+        "@typescript-eslint/eslint-plugin": "^6.2.1",
+        "@typescript-eslint/parser": "^6.2.1",
         "eslint": "^8.47.0",
+        "eslint-config-prettier": "^8.9.0",
+        "eslint-import-resolver-alias": "^1.1.2",
+        "eslint-plugin-path-alias": "^1.0.0",
+        "eslint-plugin-prettier": "^5.0.0",
+        "eslint-plugin-simple-header": "^1.0.2",
+        "eslint-plugin-simple-import-sort": "^10.0.0",
+        "eslint-plugin-svelte": "^2.32.4",
+        "eslint-plugin-unused-imports": "^3.0.0",
         "prettier": "^3.0.1",
         "svelte": "^4.2.0",
         "typescript": "^5.1.6",
