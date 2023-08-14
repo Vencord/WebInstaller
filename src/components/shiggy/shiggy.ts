@@ -20,6 +20,18 @@ export const pointStore = writable(getStoredPoints());
 export const addPoints = (amount: number | bigint) => {
     const incr = typeof amount === "bigint" ? amount : BigInt(amount);
     pointStore.update(points => points + incr);
+    shiggy();
+};
+
+export const shiggingStore = writable(false);
+let shiggyTimeout: number | null = null;
+export const shiggy = () => {
+    if (shiggyTimeout) clearTimeout(shiggyTimeout);
+    shiggingStore.set(true);
+    shiggyTimeout = setTimeout(() => {
+        shiggyTimeout = null;
+        shiggingStore.set(false);
+    }, 200);
 };
 
 pointStore.subscribe(points => {

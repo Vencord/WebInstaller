@@ -5,25 +5,27 @@
 -->
 
 <script lang="ts">
-    import { addPoints, pointStore } from "./shiggy";
+    import { openWindow } from "../../windows";
+    import { addPoints, pointStore, shiggingStore } from "./shiggy";
+    import Shop from "./Shop.svelte";
 
     $: points = $pointStore;
-
-    let shigging = false;
+    $: shigging = $shiggingStore;
 
     function shig() {
         addPoints(1);
-        shigging = true;
-        queueUnshiggy(200);
     }
 
-    let shiggyTimeout: number | null = null;
-    function queueUnshiggy(timeoutMs: number) {
-        if (shiggyTimeout) clearTimeout(shiggyTimeout);
-        shiggyTimeout = setTimeout(() => {
-            shiggyTimeout = null;
-            shigging = false;
-        }, timeoutMs);
+    function openShop() {
+        openWindow(
+            Shop,
+            {},
+            {
+                title: "Shiggy Shop",
+                width: 400,
+                height: 600
+            }
+        );
     }
 </script>
 
@@ -38,7 +40,7 @@
     </button>
     <div class="spacer" />
     {#if points >= 100}
-        <button class="shop">Open shop?</button>
+        <button class="shop" on:click={openShop}>Open shop?</button>
     {/if}
 </main>
 

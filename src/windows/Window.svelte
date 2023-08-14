@@ -21,8 +21,8 @@
 
     export let width: number;
     export let height: number;
-    export let minWidth: number | null = null;
-    export let minHeight: number | null = null;
+    export let minWidth: number | null = width;
+    export let minHeight: number | null = height;
 
     export let maximized = false;
     export let maximizable = true;

@@ -33,8 +33,6 @@ export const launchers: Launcher[] = [
                     icon: VencordIcon,
                     width: 1000,
                     height: 720,
-                    minWidth: 1000,
-                    minHeight: 720,
                     maximized: true
                 }
             );
@@ -51,9 +49,7 @@ export const launchers: Launcher[] = [
                     title: "Shiggy Clicker",
                     icon: ShiggyIcon,
                     width: 400,
-                    height: 500,
-                    minWidth: 400,
-                    minHeight: 500
+                    height: 500
                 }
             );
         }
