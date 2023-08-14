@@ -6,6 +6,8 @@
 
 <script lang="ts">
     import type { SvelteComponent } from "svelte";
+    import { cubicInOut } from "svelte/easing";
+    import type { TransitionConfig } from "svelte/transition";
     import { CircleIcon, MaximizeIcon, MinimizeIcon, XIcon } from "svelte-feather-icons";
     import type { Constructor } from "type-fest";
 
@@ -97,12 +99,21 @@
             .map(([key, value]) => `${key}:${value}`)
             .join(";");
     }
+
+    function transition(node: Element): TransitionConfig {
+        if (maximized) return { duration: 0 };
+        return {
+            duration: 200,
+            easing: cubicInOut,
+            css: t => `transform: scale(${t / 2 + 0.5}); opacity: ${t}`
+        };
+    }
 </script>
 
 <svelte:window on:mousemove={onDrag} on:mouseup={onDragEnd} />
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<div class="frame" class:maximized use:resize on:mousedown={onFocus} {style}>
+<div class="frame" class:maximized use:resize on:mousedown={onFocus} {style} in:transition out:transition>
     <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
     <div class="titlebar" role="application" on:mousedown={onDragStart}>
         <div class="icon">

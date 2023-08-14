@@ -12,7 +12,9 @@
 
     $: windows = Object.values($windowStore);
 
-    launchers[0].onClick();
+    // FIXME: Undo this when shiggy is real
+    launchers[1].onClick();
+    // launchers[0].onClick();
 </script>
 
 <div class="launchers">
