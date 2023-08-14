@@ -27,6 +27,18 @@
 
     let selectedInstall = "";
 
+    let isOpenAsarSelected = false;
+    $: {
+        installPromise
+            .then(installs => {
+                const install = installs.find(e => e.path === selectedInstall);
+                isOpenAsarSelected = install?.isOpenAsar ?? false;
+            })
+            .catch(() => {
+                isOpenAsarSelected = false;
+            });
+    }
+
     const currentVersion = "v1.2.6";
     const latestVersion = "v1.2.7";
 </script>
@@ -60,7 +72,7 @@
         {/await}
     </div>
 
-    <Actions path={selectedInstall} onAction={fetchInstalls} />
+    <Actions path={selectedInstall} onAction={fetchInstalls} isOpenAsar={isOpenAsarSelected} />
 </section>
 
 <style>

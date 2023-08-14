@@ -45,7 +45,6 @@
     }
     function onDrag(event: MouseEvent) {
         if (!dragAnchor || (!event.x && !event.y)) return;
-        console.log(event);
         const [anchorX, anchorY] = dragAnchor;
         x = event.x - anchorX;
         y = event.y - anchorY;

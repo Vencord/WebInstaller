@@ -13,8 +13,18 @@
 
     export let path: string;
     export let onAction: ((action: Op) => void) | null = null;
+    export let isOpenAsar: boolean = false;
 
     let busy = false;
+
+    function getOpPastTense(op: Op) {
+        if (op === Op.Patch) return "installed";
+        if (op === Op.Repair) return "repaired";
+        if (op === Op.Unpatch) return "uninstalled";
+        if (op === Op.InstallOpenAsar) return "installed OpenAsar";
+        if (op === Op.UninstallOpenAsar) return "uninstalled OpenAsar";
+        return "did something?";
+    }
 
     async function doAction(op: Op) {
         busy = true;
@@ -23,7 +33,7 @@
                 openWindow(
                     SuccessModal,
                     {
-                        verb: `${op.toLowerCase()}ed`
+                        verb: getOpPastTense(op)
                     },
                     {
                         title: "Success",
@@ -33,10 +43,14 @@
                     }
                 );
             })
-            .catch(() => {
+            .catch(error => {
+                const message = typeof error === "string" ? error : null;
+                if (!message) console.error(error);
                 openWindow(
                     FailureModal,
-                    {},
+                    {
+                        message
+                    },
                     {
                         title: "MASSIVE FAILURE !!!",
                         width: 450,
@@ -50,19 +64,21 @@
                 onAction?.(op);
             });
     }
-
-    async function openAsar() {
-        // TODO
-    }
 </script>
 
 <section>
     <button disabled={busy} class="label md install" on:click={() => doAction(Op.Patch)}>Install</button>
     <button disabled={busy} class="label md repair" on:click={() => doAction(Op.Repair)}>Repair</button>
     <button disabled={busy} class="label md uninstall" on:click={() => doAction(Op.Unpatch)}>Uninstall</button>
-    <button disabled={busy} class="label md openasar" on:click={() => doAction(Op.InstallOpenAsar)}
-        >Install OpenAsar</button
-    >
+    {#if isOpenAsar}
+        <button disabled={busy} class="label md openasar" on:click={() => doAction(Op.UninstallOpenAsar)}>
+            Uninstall OpenAsar
+        </button>
+    {:else}
+        <button disabled={busy} class="label md openasar" on:click={() => doAction(Op.InstallOpenAsar)}>
+            Install OpenAsar
+        </button>
+    {/if}
 </section>
 
 <style>

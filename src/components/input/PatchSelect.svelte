@@ -29,7 +29,7 @@
     <div class="legend" id="label-patch">
         <Heading tag="h6" --color="var(--accent-orange)">Please select an install to patch</Heading>
     </div>
-    {#each options as { branch, path, isPatched }}
+    {#each options as { branch, path, isPatched, isOpenAsar }}
         <div class="row" class:selected={selected === path}>
             <div class="radio-wrap">
                 <input type="radio" id={path} bind:group={selected} value={path} />
@@ -41,6 +41,9 @@
                         <span>PATCHED</span>
                         <CheckIcon size="1x" strokeWidth={5} class="dy-1" />
                     </Tag>
+                {/if}
+                {#if isOpenAsar}
+                    <Tag>OpenAsar</Tag>
                 {/if}
                 {path}
                 {#if branch}
