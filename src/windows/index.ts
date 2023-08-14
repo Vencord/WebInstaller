@@ -51,3 +51,10 @@ export const getFocusZIndex = () => {
     zIndex++;
     return zIndex * 100;
 };
+
+export const setProps = (id: string, props: Partial<ComponentProps<Window>>) => {
+    windowStore.update(windows => {
+        windows[id].props = { ...windows[id].props, ...props };
+        return windows;
+    });
+};

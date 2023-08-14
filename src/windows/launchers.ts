@@ -33,8 +33,7 @@ export const launchers: Launcher[] = [
                     height: 720,
                     minWidth: 1000,
                     minHeight: 720,
-                    maximized: true,
-                    showActions: false
+                    maximized: true
                 }
             );
         }

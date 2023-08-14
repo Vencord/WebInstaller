@@ -9,7 +9,7 @@
     import { CircleIcon, MaximizeIcon, MinimizeIcon, XIcon } from "svelte-feather-icons";
     import type { Constructor } from "type-fest";
 
-    import { closeWindow, getFocusZIndex } from ".";
+    import { closeWindow, getFocusZIndex, setProps } from ".";
 
     export let title: string;
     export let id: string;
@@ -22,7 +22,6 @@
     export let minWidth: number | null = null;
     export let minHeight: number | null = null;
 
-    export let showActions = true;
     export let maximized = false;
     export let maximizable = true;
     export let closable = true;
@@ -32,6 +31,7 @@
     }
     function toggleMaximized() {
         maximized = !maximized;
+        setProps(id, { maximized });
     }
 
     // Dragging
@@ -46,6 +46,7 @@
         const [anchorX, anchorY] = dragAnchor;
         x = event.screenX - anchorX;
         y = event.screenY - anchorY;
+        window.getSelection?.()?.empty?.();
     }
     function onDragEnd(event: MouseEvent) {
         if (dragAnchor) {
@@ -114,7 +115,7 @@
         <div class="title body sm">{title}</div>
         <div class="spacer"></div>
         <!-- svelte-ignore a11y-no-static-element-interactions -->
-        <div class="buttons" class:show={showActions} on:mousedown={event => event.stopPropagation()}>
+        <div class="buttons" on:mousedown={event => event.stopPropagation()}>
             {#if maximizable}
                 {#if maximized}
                     <button on:click={toggleMaximized} title="Restore">
@@ -183,12 +184,11 @@
     }
     .buttons {
         display: flex;
-        opacity: 0;
         transition: opacity 0.2s ease-in-out;
         height: 100%;
     }
-    .buttons.show {
-        opacity: 1;
+    .frame.maximized .buttons {
+        opacity: 0;
     }
     .buttons button {
         display: flex;
