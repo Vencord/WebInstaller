@@ -41,20 +41,21 @@
     let x = Math.floor((window.innerWidth - width) / 2);
     let y = Math.floor((window.innerHeight - height) / 2);
     function onDragStart(event: MouseEvent) {
-        dragAnchor = [event.screenX - x, event.screenY - y];
+        dragAnchor = [event.x - x, event.y - y];
     }
     function onDrag(event: MouseEvent) {
-        if (!dragAnchor || (!event.screenX && !event.screenY)) return;
+        if (!dragAnchor || (!event.x && !event.y)) return;
+        console.log(event);
         const [anchorX, anchorY] = dragAnchor;
-        x = event.screenX - anchorX;
-        y = event.screenY - anchorY;
+        x = event.x - anchorX;
+        y = event.y - anchorY;
         window.getSelection?.()?.empty?.();
     }
     function onDragEnd(event: MouseEvent) {
         if (dragAnchor) {
             const [anchorX, anchorY] = dragAnchor;
-            x = event.screenX - anchorX;
-            y = event.screenY - anchorY;
+            x = event.x - anchorX;
+            y = event.y - anchorY;
         }
         dragAnchor = null;
     }
