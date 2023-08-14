@@ -5,7 +5,7 @@
 -->
 
 <script lang="ts">
-    import { SvelteComponent } from "svelte";
+    import type { SvelteComponent } from "svelte";
     import { CircleIcon, MaximizeIcon, MinimizeIcon, XIcon } from "svelte-feather-icons";
     import type { Constructor } from "type-fest";
 
