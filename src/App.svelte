@@ -12,7 +12,8 @@
 
     $: windows = Object.values($windowStore);
 
-    launchers[0].onClick();
+    const autolaunch = +(localStorage.getItem("autolaunch") || "0") || 0;
+    (launchers[autolaunch] ?? launchers[0]).onClick();
 </script>
 
 <div class="launchers">
