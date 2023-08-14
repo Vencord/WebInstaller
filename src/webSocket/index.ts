@@ -6,7 +6,8 @@
 
 import { writable } from "svelte/store";
 
-import { ErrorPayload, Op, Payload } from "./types";
+import type { ErrorPayload, Payload } from "./types";
+import { Op } from "./types";
 
 let nonceCounter = 0;
 

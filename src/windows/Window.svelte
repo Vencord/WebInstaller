@@ -9,7 +9,7 @@
     import { CircleIcon, MaximizeIcon, MinimizeIcon, XIcon } from "svelte-feather-icons";
     import type { Constructor } from "type-fest";
 
-    import { closeWindow } from ".";
+    import { closeWindow, getFocusZIndex } from ".";
 
     export let title: string;
     export let id: string;
@@ -56,24 +56,12 @@
         dragAnchor = null;
     }
 
-    // Inline styles
-    let style: string;
-    $: {
-        const styleProps: Record<string, string> = {
-            "background-color": backgroundColor
-        };
-        if (!maximized) {
-            styleProps.width = `${width}px`;
-            styleProps.height = `${height}px`;
-            styleProps.left = `${x}px`;
-            styleProps.top = `${y}px`;
-        }
-        if (minHeight) styleProps["min-height"] = `${minHeight}px`;
-        if (minWidth) styleProps["min-width"] = `${minWidth}px`;
-        style = Object.entries(styleProps)
-            .map(([key, value]) => `${key}:${value}`)
-            .join(";");
+    // Focusing
+    let z = 0;
+    function onFocus() {
+        z = getFocusZIndex();
     }
+    onFocus();
 
     // Resizing
     function resize(node: HTMLElement) {
@@ -88,11 +76,32 @@
             }
         };
     }
+
+    // Inline styles
+    let style: string;
+    $: {
+        const styleProps: Record<string, string> = {
+            "background-color": backgroundColor
+        };
+        if (!maximized) {
+            styleProps.width = `${width}px`;
+            styleProps.height = `${height}px`;
+            styleProps.left = `${x}px`;
+            styleProps.top = `${y}px`;
+            styleProps["z-index"] = `${z}`;
+        }
+        if (minHeight) styleProps["min-height"] = `${minHeight}px`;
+        if (minWidth) styleProps["min-width"] = `${minWidth}px`;
+        style = Object.entries(styleProps)
+            .map(([key, value]) => `${key}:${value}`)
+            .join(";");
+    }
 </script>
 
 <svelte:window on:mousemove={onDrag} on:mouseup={onDragEnd} />
 
-<div class="frame" class:maximized use:resize {style}>
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<div class="frame" class:maximized use:resize on:mousedown={onFocus} {style}>
     <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
     <div class="titlebar" role="application" on:mousedown={onDragStart}>
         <div class="icon">

@@ -4,9 +4,9 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { SvelteComponent } from "svelte";
+import type { SvelteComponent } from "svelte";
 import { writable } from "svelte/store";
-import { Constructor, SetOptional } from "type-fest";
+import type { Constructor, SetOptional } from "type-fest";
 
 import type Window from "./Window.svelte";
 
@@ -16,7 +16,6 @@ type WindowInstance<T extends SvelteComponent = SvelteComponent> = {
     props: ComponentProps<Window>;
     content: Constructor<T>;
     contentProps: ComponentProps<T>;
-    // TODO: lastFocus timestamp, to sort how windows are drawn
 };
 
 export const windowStore = writable<Record<string, WindowInstance>>({});
@@ -45,4 +44,10 @@ export const closeWindow = (id: string) => {
         delete windows[id];
         return windows;
     });
+};
+
+let zIndex = 0;
+export const getFocusZIndex = () => {
+    zIndex++;
+    return zIndex * 100;
 };

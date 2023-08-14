@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { SvelteComponent } from "svelte";
-import { Constructor } from "type-fest";
+import type { SvelteComponent } from "svelte";
+import type { Constructor } from "type-fest";
 
 import VencordIcon from "../components/icons/VencordIcon.svelte";
 import Installer from "../components/installer/Installer.svelte";
