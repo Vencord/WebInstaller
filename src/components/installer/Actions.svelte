@@ -29,8 +29,6 @@
                         title: "Success",
                         width: 400,
                         height: 475,
-                        minWidth: 400,
-                        minHeight: 475,
                         maximizable: false
                     }
                 );
@@ -43,8 +41,6 @@
                         title: "MASSIVE FAILURE !!!",
                         width: 450,
                         height: 200,
-                        minWidth: 450,
-                        minHeight: 200,
                         maximizable: false
                     }
                 );

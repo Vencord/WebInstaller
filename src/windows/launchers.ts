@@ -7,6 +7,7 @@
 import type { SvelteComponent } from "svelte";
 import type { Constructor } from "type-fest";
 
+import ShiggyIcon from "../components/icons/ShiggyIcon.svelte";
 import VencordIcon from "../components/icons/VencordIcon.svelte";
 import Installer from "../components/installer/Installer.svelte";
 import { openWindow } from ".";
@@ -31,11 +32,27 @@ export const launchers: Launcher[] = [
                     icon: VencordIcon,
                     width: 1000,
                     height: 720,
-                    minWidth: 1000,
-                    minHeight: 720,
                     maximized: true
                 }
             );
+        }
+    },
+    {
+        name: "Shiggy Clicker",
+        icon: ShiggyIcon,
+        onClick: () => {
+            import("../components/shiggy/ShiggyGame.svelte").then(({ default: ShiggyGame }) => {
+                openWindow(
+                    ShiggyGame,
+                    {},
+                    {
+                        title: "Shiggy Clicker",
+                        icon: ShiggyIcon,
+                        width: 400,
+                        height: 500
+                    }
+                );
+            });
         }
     }
 ];
