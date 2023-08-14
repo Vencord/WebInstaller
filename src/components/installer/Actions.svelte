@@ -4,11 +4,40 @@
   SPDX-License-Identifier: GPL-3.0-or-later
 -->
 
+<script lang="ts">
+    import { sendMessage } from "../../webSocket";
+    import { Op } from "../../webSocket/types";
+
+    export let path: string;
+
+    async function install() {
+        await sendMessage(Op.Patch, path)
+            .then(() => alert("ok"))
+            .catch(() => alert("fake"));
+    }
+
+    async function repair() {
+        await sendMessage(Op.Repair, path)
+            .then(() => alert("ok"))
+            .catch(() => alert("fake"));
+    }
+
+    async function uninstall() {
+        await sendMessage(Op.Unpatch, path)
+            .then(() => alert("ok"))
+            .catch(() => alert("fake"));
+    }
+
+    async function openAsar() {
+        // TODO
+    }
+</script>
+
 <section>
-    <button class="label md install">Install</button>
-    <button class="label md repair">Repair</button>
-    <button class="label md uninstall">Uninstall</button>
-    <button class="label md openasar">Install OpenAsar</button>
+    <button class="label md install" on:click={install}>Install</button>
+    <button class="label md repair" on:click={repair}>Repair</button>
+    <button class="label md uninstall" on:click={uninstall}>Uninstall</button>
+    <button class="label md openasar" on:click={openAsar}>Install OpenAsar</button>
 </section>
 
 <style>

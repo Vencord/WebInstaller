@@ -50,7 +50,7 @@
         {/await}
     </div>
 
-    <Actions />
+    <Actions path={selectedInstall} />
 </section>
 
 <style>
