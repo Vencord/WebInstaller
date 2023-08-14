@@ -24,19 +24,14 @@
 
     export let showActions = true;
     export let maximized = false;
-    export let minimized = false;
     export let maximizable = true;
-    export let minimizable = true;
     export let closable = true;
 
     function close() {
         closeWindow(id);
     }
-    function maximize() {
+    function toggleMaximized() {
         maximized = !maximized;
-    }
-    function minimize() {
-        minimized = !minimized;
     }
 
     // Dragging
@@ -83,6 +78,7 @@
     // Resizing
     function resize(node: HTMLElement) {
         const observer = new ResizeObserver(entries => {
+            if (maximized) return;
             ({ width, height } = entries[0].contentRect);
         });
         observer.observe(node);
@@ -110,11 +106,16 @@
         <div class="spacer"></div>
         <!-- svelte-ignore a11y-no-static-element-interactions -->
         <div class="buttons" class:show={showActions} on:mousedown={event => event.stopPropagation()}>
-            {#if minimizable}
-                <button on:click={minimize} title="Minimize"><MinimizeIcon size="1.1x" strokeWidth={3} /></button>
-            {/if}
             {#if maximizable}
-                <button on:click={maximize} title="Maximize"><MaximizeIcon size="1.1x" strokeWidth={3} /></button>
+                {#if maximized}
+                    <button on:click={toggleMaximized} title="Restore">
+                        <MinimizeIcon size="1.1x" strokeWidth={3} />
+                    </button>
+                {:else}
+                    <button on:click={toggleMaximized} title="Maximize">
+                        <MaximizeIcon size="1.1x" strokeWidth={3} />
+                    </button>
+                {/if}
             {/if}
             {#if closable}
                 <button on:click={close} title="Close" class="close"><XIcon size="1.5x" /></button>

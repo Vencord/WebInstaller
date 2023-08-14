@@ -31,8 +31,7 @@
                         height: 475,
                         minWidth: 400,
                         minHeight: 475,
-                        maximizable: false,
-                        minimizable: false
+                        maximizable: false
                     }
                 );
             })
@@ -46,8 +45,7 @@
                         height: 200,
                         minWidth: 450,
                         minHeight: 200,
-                        maximizable: false,
-                        minimizable: false
+                        maximizable: false
                     }
                 );
             })
