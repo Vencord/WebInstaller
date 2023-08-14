@@ -79,11 +79,24 @@
             .map(([key, value]) => `${key}:${value}`)
             .join(";");
     }
+
+    // Resizing
+    function resize(node: HTMLElement) {
+        const observer = new ResizeObserver(entries => {
+            ({ width, height } = entries[0].contentRect);
+        });
+        observer.observe(node);
+        return {
+            destroy() {
+                observer.disconnect();
+            }
+        };
+    }
 </script>
 
 <svelte:window on:mousemove={onDrag} on:mouseup={onDragEnd} />
 
-<div class="frame" class:maximized {style}>
+<div class="frame" class:maximized use:resize {style}>
     <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
     <div class="titlebar" role="application" on:mousedown={onDragStart}>
         <div class="icon">
@@ -118,7 +131,6 @@
         display: flex;
         flex-direction: column;
         position: absolute;
-        /* FIXME: resizing resets after dragged */
         resize: both;
         overflow: hidden;
         outline: 1px solid var(--bg-3);
