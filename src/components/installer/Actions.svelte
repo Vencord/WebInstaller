@@ -7,25 +7,54 @@
 <script lang="ts">
     import { sendMessage } from "../../webSocket";
     import { Op } from "../../webSocket/types";
+    import { openWindow } from "../../windows";
+    import FailureModal from "./FailureModal.svelte";
+    import SuccessModal from "./SuccessModal.svelte";
 
     export let path: string;
+    export let onAction: ((action: Op) => void) | null = null;
 
-    async function install() {
-        await sendMessage(Op.Patch, path)
-            .then(() => alert("ok"))
-            .catch(() => alert("fake"));
-    }
+    let busy = false;
 
-    async function repair() {
-        await sendMessage(Op.Repair, path)
-            .then(() => alert("ok"))
-            .catch(() => alert("fake"));
-    }
-
-    async function uninstall() {
-        await sendMessage(Op.Unpatch, path)
-            .then(() => alert("ok"))
-            .catch(() => alert("fake"));
+    async function doAction(op: Op) {
+        busy = true;
+        await sendMessage(op, path)
+            .then(() => {
+                openWindow(
+                    SuccessModal,
+                    {
+                        verb: `${op.toLowerCase()}ed`
+                    },
+                    {
+                        title: "Success",
+                        width: 400,
+                        height: 475,
+                        minWidth: 400,
+                        minHeight: 475,
+                        maximizable: false,
+                        minimizable: false
+                    }
+                );
+            })
+            .catch(() => {
+                openWindow(
+                    FailureModal,
+                    {},
+                    {
+                        title: "MASSIVE FAILURE !!!",
+                        width: 450,
+                        height: 200,
+                        minWidth: 450,
+                        minHeight: 200,
+                        maximizable: false,
+                        minimizable: false
+                    }
+                );
+            })
+            .finally(() => {
+                busy = false;
+                onAction?.(op);
+            });
     }
 
     async function openAsar() {
@@ -34,10 +63,12 @@
 </script>
 
 <section>
-    <button class="label md install" on:click={install}>Install</button>
-    <button class="label md repair" on:click={repair}>Repair</button>
-    <button class="label md uninstall" on:click={uninstall}>Uninstall</button>
-    <button class="label md openasar" on:click={openAsar}>Install OpenAsar</button>
+    <button disabled={busy} class="label md install" on:click={() => doAction(Op.Patch)}>Install</button>
+    <button disabled={busy} class="label md repair" on:click={() => doAction(Op.Repair)}>Repair</button>
+    <button disabled={busy} class="label md uninstall" on:click={() => doAction(Op.Unpatch)}>Uninstall</button>
+    <button disabled={busy} class="label md openasar" on:click={() => doAction(Op.InstallOpenAsar)}
+        >Install OpenAsar</button
+    >
 </section>
 
 <style>
@@ -55,6 +86,10 @@
         background-color: var(--fg-1);
         color: var(--bg-current-word);
         cursor: pointer;
+    }
+    button:disabled {
+        opacity: 0.7;
+        cursor: default;
     }
 
     .install {

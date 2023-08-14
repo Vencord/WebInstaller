@@ -5,6 +5,8 @@
 -->
 
 <script lang="ts">
+    import { CheckIcon } from "svelte-feather-icons";
+
     import type { DiscordInstall } from "../../webSocket/types";
     import Heading from "../text/Heading.svelte";
     import Tag from "../text/Tag.svelte";
@@ -35,7 +37,10 @@
             </div>
             <label for={path}>
                 {#if isPatched}
-                    <Tag --color="var(--accent-green)">PATCHED</Tag>
+                    <Tag --color="var(--accent-green)">
+                        <span>PATCHED</span>
+                        <CheckIcon size="1x" strokeWidth={5} class="dy-1" />
+                    </Tag>
                 {/if}
                 {path}
                 {#if branch}

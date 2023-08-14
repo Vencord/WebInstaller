@@ -5,30 +5,32 @@
 -->
 
 <script lang="ts">
-    import Main from "./components/installer/Main.svelte";
-    import Heading from "./components/text/Heading.svelte";
-    import { readyStore } from "./webSocket";
+    import VencordIcon from "./components/icons/VencordIcon.svelte";
+    import Installer from "./components/installer/Installer.svelte";
+    import { openWindow, windowStore } from "./windows";
+    import Window from "./windows/Window.svelte";
 
-    $: ready = $readyStore;
+    $: windows = Object.values($windowStore);
+
+    openWindow(
+        Installer,
+        {},
+        {
+            title: "Vencord Installer",
+            id: "installer",
+            icon: VencordIcon,
+            width: 1000,
+            height: 720,
+            minWidth: 1000,
+            minHeight: 720,
+            maximized: true,
+            showActions: false
+        }
+    );
 </script>
 
-<main>
-    <Heading tag="h2" --color="var(--accent-purple)">Vencord Installer</Heading>
-
-    {#if ready}
-        <Main />
-    {:else}
-        <p>no connection</p>
-    {/if}
-</main>
-
-<style>
-    main {
-        display: flex;
-        flex-direction: column;
-        gap: 2.5rem;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-    }
-</style>
+{#each windows as window (window.props.id)}
+    <Window {...window.props}>
+        <svelte:component this={window.content} {...window.contentProps} />
+    </Window>
+{/each}

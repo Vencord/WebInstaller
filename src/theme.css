@@ -239,3 +239,7 @@ hr {
     border-top: 1px solid var(--bg-3);
     margin: 1.75rem 0;
 }
+
+.dy-1 {
+    transform: translateY(0.125em);
+}

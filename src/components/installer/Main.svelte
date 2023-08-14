@@ -14,9 +14,16 @@
     const userDataDir = "%APPDATA%\\Vencord";
 
     const branches = ["stable", "canary", "ptb", "development"];
-    const installPromise = sendMessage<DiscordInstall[]>(Op.ListInstalls).then(installs => {
-        return installs.sort((a, b) => branches.indexOf(a.branch) - branches.indexOf(b.branch));
-    });
+    let installPromise: Promise<DiscordInstall[]>;
+
+    function fetchInstalls() {
+        const promise = sendMessage<DiscordInstall[]>(Op.ListInstalls).then(installs => {
+            return installs.sort((a, b) => branches.indexOf(a.branch) - branches.indexOf(b.branch));
+        });
+        if (!installPromise) installPromise = promise;
+        else promise.then(installs => (installPromise = Promise.resolve(installs)));
+    }
+    fetchInstalls();
 
     let selectedInstall = "";
 
@@ -30,7 +37,7 @@
             Files will be downloaded to <Tag>{userDataDir}</Tag>
         </p>
         <p>
-            To customize this location, set the environment variable <Tag>VENCORD_USER_DATA_DIR</Tag> and restart me
+            To customize this location, set the environment variable <Tag>VENCORD_USER_DATA_DIR</Tag> and restart the daemon
         </p>
         <hr />
         <div class="installer">
@@ -53,7 +60,7 @@
         {/await}
     </div>
 
-    <Actions path={selectedInstall} />
+    <Actions path={selectedInstall} onAction={fetchInstalls} />
 </section>
 
 <style>
