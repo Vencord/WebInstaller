@@ -16,7 +16,7 @@
     const getBranchColor = (branch: string) => {
         const varName =
             {
-                stable: "--accent-green",
+                stable: "--accent-blue",
                 canary: "--accent-yellow"
             }[branch] ?? "--grey-1";
         return `var(${varName})`;

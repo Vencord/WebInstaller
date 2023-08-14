@@ -13,7 +13,10 @@
 
     const userDataDir = "%APPDATA%\\Vencord";
 
-    const installPromise = sendMessage<DiscordInstall[]>(Op.ListInstalls);
+    const branches = ["stable", "canary", "ptb", "development"];
+    const installPromise = sendMessage<DiscordInstall[]>(Op.ListInstalls).then(installs => {
+        return installs.sort((a, b) => branches.indexOf(a.branch) - branches.indexOf(b.branch));
+    });
 
     let selectedInstall = "";
 
