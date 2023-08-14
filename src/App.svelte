@@ -6,13 +6,14 @@
 
 <script lang="ts">
     import Main from "./components/installer/Main.svelte";
+    import Heading from "./components/text/Heading.svelte";
     import { readyStore } from "./webSocket";
 
     $: ready = $readyStore;
 </script>
 
 <main>
-    <h1>Vencord Installer</h1>
+    <Heading tag="h2" --color="var(--accent-purple)">Vencord Installer</Heading>
 
     {#if ready}
         <Main />
@@ -29,8 +30,5 @@
         align-items: center;
         justify-content: center;
         height: 100%;
-    }
-    h1 {
-        color: var(--accent-purple);
     }
 </style>

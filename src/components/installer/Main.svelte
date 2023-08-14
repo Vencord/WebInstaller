@@ -8,6 +8,7 @@
     import { sendMessage } from "../../webSocket";
     import { type DiscordInstall, Op } from "../../webSocket/types";
     import PatchSelect from "../input/PatchSelect.svelte";
+    import Tag from "../text/Tag.svelte";
     import Actions from "./Actions.svelte";
 
     const userDataDir = "%APPDATA%\\Vencord";
@@ -23,22 +24,20 @@
 <section>
     <div>
         <p>
-            Files will be downloaded to <code class="overline sm">{userDataDir}</code>
+            Files will be downloaded to <Tag>{userDataDir}</Tag>
         </p>
         <p>
-            To customize this location, set the environment variable <code class="overline sm"
-                >VENCORD_USER_DATA_DIR</code
-            > and restart me
+            To customize this location, set the environment variable <Tag>VENCORD_USER_DATA_DIR</Tag> and restart me
         </p>
         <hr />
         <div class="installer">
             <div class="version">
                 <p class="overline sm current">Current</p>
-                <code>{currentVersion}</code>
+                <Tag>{currentVersion}</Tag>
             </div>
             <div class="version">
                 <p class="overline sm latest">latest</p>
-                <code>{latestVersion}</code>
+                <Tag>{latestVersion}</Tag>
             </div>
         </div>
         <hr />

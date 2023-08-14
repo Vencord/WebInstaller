@@ -30,8 +30,7 @@
                         "files": ["scripts/header.txt"],
                         "templates": { "author": [".*", "Vendicated, Justice Almanzar and Vencord contributors"] }
                     }
-                ],
-                "prettier/prettier": "off"
+                ]
             }
         }
     ],

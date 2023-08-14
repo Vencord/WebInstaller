@@ -6,16 +6,26 @@
 
 <script lang="ts">
     import type { DiscordInstall } from "../../webSocket/types";
+    import Heading from "../text/Heading.svelte";
+    import Tag from "../text/Tag.svelte";
 
     export let options: DiscordInstall[];
     export let selected = options[0].path;
 
     const id = Math.floor(Math.random() * 100);
+    const getBranchColor = (branch: string) => {
+        const varName =
+            {
+                stable: "--accent-green",
+                canary: "--accent-yellow"
+            }[branch] ?? "--grey-1";
+        return `var(${varName})`;
+    };
 </script>
 
 <div role="radiogroup" class="container" aria-labelledby="label-patch" id={`group-${id}`}>
     <div class="legend" id="label-patch">
-        <h6>Please select an install to patch</h6>
+        <Heading tag="h6" --color="var(--accent-orange)">Please select an install to patch</Heading>
     </div>
     {#each options as { branch, path, isPatched }}
         <div class="row" class:selected={selected === path}>
@@ -23,15 +33,15 @@
                 <input type="radio" id={path} bind:group={selected} value={path} />
                 <span class="radio"><div class="check" /></span>
             </div>
-            {#if isPatched}
-                <code class="overline sm patched">PATCHED</code>
-            {/if}
-            <label for={path}>{path}</label>
-            {#if branch}
-                <code class="overline sm" class:stable={branch === "stable"} class:canary={branch === "canary"}
-                    >{branch}</code
-                >
-            {/if}
+            <label for={path}>
+                {#if isPatched}
+                    <Tag --color="var(--accent-green)">PATCHED</Tag>
+                {/if}
+                {path}
+                {#if branch}
+                    <Tag --color={getBranchColor(branch)}>{branch}</Tag>
+                {/if}
+            </label>
         </div>
     {/each}
 </div>
@@ -41,6 +51,11 @@
         display: flex;
         gap: 0.75rem;
         flex-direction: column;
+    }
+
+    input[type="radio"],
+    label {
+        cursor: pointer;
     }
 
     .row {
@@ -78,8 +93,7 @@
     input[type="radio"]:checked ~ .radio .check {
         opacity: 1;
     }
-    h6 {
-        color: var(--accent-orange);
+    .legend {
         margin-bottom: 0.5rem;
     }
     input[type="radio"] {
@@ -88,18 +102,5 @@
         width: 1.25rem;
         height: 1.25rem;
         opacity: 0;
-    }
-
-    code {
-        font-family: var(--font);
-    }
-    .patched {
-        color: var(--accent-green);
-    }
-    .stable {
-        color: var(--accent-blue);
-    }
-    .canary {
-        color: var(--accent-yellow);
     }
 </style>
