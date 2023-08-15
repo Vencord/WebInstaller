@@ -6,13 +6,24 @@
 
 <script lang="ts">
     import { openWindow } from "../../windows";
+    import { clickParticles } from "./particles";
     import { addPoints, pointStore, shiggingStore } from "./shiggy";
     import Shop from "./Shop.svelte";
 
     $: points = $pointStore;
     $: shigging = $shiggingStore;
 
-    function shig() {
+    const clickParticlesStore = clickParticles.store;
+    const clickParticlesTransition = clickParticles.transition;
+    $: activeShiggies = $clickParticlesStore;
+
+    function shig(event: MouseEvent) {
+        const angle = Math.random() * Math.PI;
+        clickParticles.create({
+            x: event.offsetX,
+            y: event.offsetY,
+            v0: [Math.cos(angle), Math.sin(angle)]
+        });
         addPoints(1);
     }
 
@@ -28,12 +39,22 @@
         );
     }
 
-    $: shiggyUrl = `https://media.discordapp.net/stickers/1039992459209490513.png?passthrough=${shigging}`;
+    const shiggyPng = "https://media.discordapp.net/stickers/1039992459209490513.png";
+    $: shiggyUrl = `${shiggyPng}?passthrough=${shigging}`;
 </script>
 
 <main>
     <p class="points overline lg">{points} shiggies</p>
-    <button class="shig" on:click={shig} style="background-image:url({shiggyUrl})" />
+    <button class="shig" on:click={shig} style="background-image:url({shiggyUrl})">
+        {#each activeShiggies as shiggy (shiggy.id)}
+            <div
+                class="shiggy-clicked"
+                style="background-image:url({shiggyPng});left:calc({shiggy.data.x}px - 1em);top:calc({shiggy.data
+                    .y}px - 1em);"
+                out:clickParticlesTransition={shiggy.data}
+            ></div>
+        {/each}
+    </button>
     <div class="spacer" />
     {#if points >= 100}
         <button class="shop" on:click={openShop}>Open shop?</button>
@@ -59,11 +80,21 @@
         height: 8em;
         cursor: pointer;
         background-size: contain;
+        position: relative;
     }
 
     .shop {
         color: var(--accent-green);
         text-decoration: underline;
         cursor: pointer;
+    }
+
+    .shiggy-clicked {
+        width: 2em;
+        height: 2em;
+        background-size: contain;
+        pointer-events: none;
+        position: absolute;
+        opacity: 0;
     }
 </style>
