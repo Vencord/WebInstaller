@@ -25,7 +25,8 @@
         addPoints(1);
     }
 
-    function openShop() {
+    function openShop(event: MouseEvent) {
+        event.stopPropagation();
         openWindow(
             Shop,
             {},
@@ -88,5 +89,10 @@
         color: var(--accent-green);
         text-decoration: underline;
         cursor: pointer;
+    }
+
+    .shig,
+    .points {
+        pointer-events: none;
     }
 </style>
