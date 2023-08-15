@@ -6,22 +6,16 @@
 
 <script lang="ts">
     import { openWindow } from "../../windows";
-    import { bgParticles, clickParticles } from "./particles";
+    import { clickParticles } from "./particles";
+    import Particles from "./Particles.svelte";
     import { addPoints, pointStore, shiggingStore } from "./shiggy";
     import Shop from "./Shop.svelte";
 
     $: points = $pointStore;
     $: shigging = $shiggingStore;
 
-    const clickParticlesStore = clickParticles.store;
-    const clickParticlesTransition = clickParticles.transition;
-    $: activeShiggies = $clickParticlesStore;
-
-    const bgParticlesStore = bgParticles.store;
-    const bgParticlesTransition = bgParticles.transition;
-    $: passiveShiggies = $bgParticlesStore;
-
     function shig(event: MouseEvent) {
+        console.log(event);
         const angle = Math.random() * Math.PI;
         clickParticles.create({
             x: event.offsetX,
@@ -42,30 +36,15 @@
             }
         );
     }
-
-    const shiggyPng = "https://media.discordapp.net/stickers/1039992459209490513.png";
 </script>
 
-<main>
-    {#each passiveShiggies as shiggy (shiggy.id)}
-        <div
-            class="shiggy-bg"
-            style="background-image:url({shiggyPng});left:calc({~~(shiggy.data.x * 100)}% - 1em);top:calc({shiggy.data
-                .y}px - 1em);"
-            out:bgParticlesTransition={shiggy.data}
-        ></div>
-    {/each}
-    <p class="points overline lg">{points} shiggies</p>
-    <button class="shig" class:shigging on:click={shig}>
-        {#each activeShiggies as shiggy (shiggy.id)}
-            <div
-                class="shiggy-clicked"
-                style="background-image:url({shiggyPng});left:calc({shiggy.data.x}px - 1em);top:calc({shiggy.data
-                    .y}px - 1em);"
-                out:clickParticlesTransition={shiggy.data}
-            ></div>
-        {/each}
-    </button>
+<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<main on:click={shig}>
+    <Particles>
+        <p class="points overline lg">{points} shiggies</p>
+        <div class="shig" class:shigging></div>
+    </Particles>
     <div class="spacer" />
     {#if points >= 100}
         <button class="shop" on:click={openShop}>Open shop?</button>
@@ -84,6 +63,7 @@
         user-select: none;
         position: relative;
         overflow: hidden;
+        cursor: pointer;
     }
     .spacer {
         flex: 1;
@@ -93,7 +73,6 @@
         height: 8em;
         background: url(https://media.discordapp.net/stickers/1039992459209490513.png?passthrough=false),
             url(https://media.discordapp.net/stickers/1039992459209490513.png?passthrough=true);
-        cursor: pointer;
         background-size:
             contain,
             0 0;
@@ -109,18 +88,5 @@
         color: var(--accent-green);
         text-decoration: underline;
         cursor: pointer;
-    }
-
-    .shiggy-clicked,
-    .shiggy-bg {
-        width: 2em;
-        height: 2em;
-        background-size: contain;
-        pointer-events: none;
-        position: absolute;
-        opacity: 0;
-    }
-    .shiggy-bg {
-        filter: blur(1px);
     }
 </style>
