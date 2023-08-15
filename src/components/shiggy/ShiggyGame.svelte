@@ -45,7 +45,7 @@
 
 <main>
     <p class="points overline lg">{points} shiggies</p>
-    <button class="shig" on:click={shig} style="background-image:url({shiggyUrl})">
+    <button class="shig" class:shigging on:click={shig}>
         {#each activeShiggies as shiggy (shiggy.id)}
             <div
                 class="shiggy-clicked"
@@ -78,9 +78,18 @@
     .shig {
         width: 8em;
         height: 8em;
+        background: url(https://media.discordapp.net/stickers/1039992459209490513.png?passthrough=false),
+            url(https://media.discordapp.net/stickers/1039992459209490513.png?passthrough=true);
         cursor: pointer;
-        background-size: contain;
+        background-size:
+            contain,
+            0 0;
         position: relative;
+    }
+    .shig.shigging {
+        background-size:
+            0 0,
+            contain;
     }
 
     .shop {
