@@ -6,6 +6,8 @@
 
 import { writable } from "svelte/store";
 
+import { bgParticles } from "./particles";
+
 const shiggyPointsKey = "shiggyPoints";
 
 function getStoredPoints() {
@@ -21,6 +23,13 @@ export const addPoints = (amount: number | bigint) => {
     const incr = typeof amount === "bigint" ? amount : BigInt(amount);
     pointStore.update(points => points + incr);
     shiggy();
+
+    bgParticles.create({
+        x: Math.random(),
+        y: Math.random(),
+        v: Math.random(),
+        s: Number(amount)
+    });
 };
 
 export const shiggingStore = writable(false);

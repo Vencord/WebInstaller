@@ -68,3 +68,21 @@ export const clickParticles = createParticleStore<{
         }
     };
 });
+
+export const bgParticles = createParticleStore<{
+    x: number;
+    y: number;
+    v: number;
+    s: number;
+}>((node, { v, s }) => {
+    const dy = v * 400 + 40;
+    return {
+        duration: dy * 10,
+        // easing: circOut,
+        css: t => {
+            const q = 1 - 2 * Math.abs(t - 0.5);
+            const rt = 1 - t;
+            return `opacity:${q * 0.5};transform:scale(${s}) translateY(${dy * rt}px)`;
+        }
+    };
+});
