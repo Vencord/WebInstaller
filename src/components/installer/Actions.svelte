@@ -8,6 +8,7 @@
     import { sendMessage } from "../../webSocket";
     import { Op } from "../../webSocket/types";
     import { openWindow } from "../../windows";
+    import Button from "../Button.svelte";
     import FailureModal from "./FailureModal.svelte";
     import SuccessModal from "./SuccessModal.svelte";
 
@@ -67,51 +68,27 @@
 </script>
 
 <section>
-    <button disabled={busy} class="label md install" on:click={() => doAction(Op.Patch)}>Install</button>
-    <button disabled={busy} class="label md repair" on:click={() => doAction(Op.Repair)}>Repair</button>
-    <button disabled={busy} class="label md uninstall" on:click={() => doAction(Op.Unpatch)}>Uninstall</button>
+    <Button disabled={busy} --accent="var(--accent-green)" on:click={() => doAction(Op.Patch)}>Install</Button>
+    <Button disabled={busy} --accent="var(--accent-blue)" on:click={() => doAction(Op.Repair)}>Repair</Button>
+    <Button disabled={busy} --accent="var(--accent-red)" on:click={() => doAction(Op.Unpatch)}>Uninstall</Button>
     {#if isOpenAsar}
-        <button disabled={busy} class="label md openasar" on:click={() => doAction(Op.UninstallOpenAsar)}>
+        <Button disabled={busy} class="openasar" on:click={() => doAction(Op.UninstallOpenAsar)}>
             Uninstall OpenAsar
-        </button>
+        </Button>
     {:else}
-        <button disabled={busy} class="label md openasar" on:click={() => doAction(Op.InstallOpenAsar)}>
-            Install OpenAsar
-        </button>
+        <Button disabled={busy} class="openasar" on:click={() => doAction(Op.InstallOpenAsar)}>Install OpenAsar</Button>
     {/if}
 </section>
 
 <style>
     section {
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 1rem;
         width: 100%;
     }
-    button {
-        flex: 1;
-        text-align: center;
-        box-sizing: border-box;
-        padding: 0.75rem 1rem;
-        border-radius: 0.75rem;
-        background-color: var(--fg-1);
-        color: var(--bg-current-word);
-        cursor: pointer;
-    }
-    button:disabled {
-        opacity: 0.7;
-        cursor: default;
-    }
 
-    .install {
-        background-color: var(--accent-green);
-    }
-    .repair {
-        background-color: var(--accent-blue);
-    }
-    .uninstall {
-        background-color: var(--accent-red);
-    }
-    .openasar {
+    section :global(.openasar) {
         background-color: var(--bg-3);
         border: 1px solid var(--fg-0);
         color: var(--fg-1);
