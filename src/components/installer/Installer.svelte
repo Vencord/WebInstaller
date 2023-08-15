@@ -8,6 +8,7 @@
     import { readyStore } from "../../webSocket";
     import Heading from "../text/Heading.svelte";
     import Main from "./Main.svelte";
+    import NoConnection from "./NoConnection.svelte";
 
     $: ready = $readyStore;
 </script>
@@ -18,7 +19,7 @@
     {#if ready}
         <Main />
     {:else}
-        <p>no connection</p>
+        <NoConnection />
     {/if}
 </main>
 
