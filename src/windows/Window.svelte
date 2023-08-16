@@ -156,7 +156,7 @@
         position: absolute;
         resize: both;
         overflow: hidden;
-        outline: 1px solid #f2e4bc;
+        outline: 1px solid #3c3836;
     }
     .frame:not(.maximized) {
         border-radius: 0.5rem;
@@ -178,7 +178,7 @@
     .titlebar {
         display: flex;
         align-items: center;
-        background: #1e2021; /* dark theme bg-0 */
+        background: #1e2021;
         cursor: default;
         height: 2rem;
         user-select: none;
@@ -212,11 +212,11 @@
         width: 2.5rem;
     }
     .buttons button:hover {
-        background-color: #f2e4bc;
+        background-color: #3c3836;
     }
     .buttons button.close:hover {
-        background-color: #ae5858;
-        color: #f9f5d7;
+        background-color: #ea6962;
+        color: #1e2021;
     }
     .titlebar:hover .buttons {
         opacity: 1;
