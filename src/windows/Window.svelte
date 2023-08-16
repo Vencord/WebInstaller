@@ -179,6 +179,7 @@
         display: flex;
         align-items: center;
         background: #1e2021;
+        color: #d4be98;
         cursor: default;
         height: 2rem;
         user-select: none;
