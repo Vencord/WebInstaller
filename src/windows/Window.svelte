@@ -156,7 +156,7 @@
         position: absolute;
         resize: both;
         overflow: hidden;
-        outline: 1px solid var(--bg-3);
+        outline: 1px solid #f2e4bc;
     }
     .frame:not(.maximized) {
         border-radius: 0.5rem;
@@ -212,11 +212,11 @@
         width: 2.5rem;
     }
     .buttons button:hover {
-        background-color: var(--bg-3);
+        background-color: #f2e4bc;
     }
     .buttons button.close:hover {
-        background-color: var(--bg-accent-red);
-        color: var(--bg-0);
+        background-color: #ae5858;
+        color: #f9f5d7;
     }
     .titlebar:hover .buttons {
         opacity: 1;
