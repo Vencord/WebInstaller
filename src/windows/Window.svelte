@@ -142,6 +142,7 @@
                 <button on:click={close} title="Close" class="close"><XIcon size="1.5x" /></button>
             {/if}
         </div>
+        <div class="pwa-draggable"></div>
     </div>
     <div class="content">
         <slot />
@@ -155,7 +156,7 @@
         position: absolute;
         resize: both;
         overflow: hidden;
-        outline: 1px solid var(--bg-3);
+        outline: 1px solid #3c3836;
     }
     .frame:not(.maximized) {
         border-radius: 0.5rem;
@@ -177,11 +178,13 @@
     .titlebar {
         display: flex;
         align-items: center;
-        background: var(--bg-0);
+        background: #1e2021;
+        color: #d4be98;
         cursor: default;
         height: 2rem;
         user-select: none;
     }
+
     .icon {
         display: flex;
         align-items: center;
@@ -190,6 +193,7 @@
         height: 1.25rem;
         margin: 0 1rem;
     }
+
     .spacer {
         flex: 1;
     }
@@ -209,11 +213,11 @@
         width: 2.5rem;
     }
     .buttons button:hover {
-        background-color: var(--bg-3);
+        background-color: #3c3836;
     }
     .buttons button.close:hover {
-        background-color: var(--bg-accent-red);
-        color: var(--bg-0);
+        background-color: #ea6962;
+        color: #1e2021;
     }
     .titlebar:hover .buttons {
         opacity: 1;
@@ -221,5 +225,35 @@
 
     .content {
         flex: 1;
+    }
+
+    .pwa-draggable {
+        display: none;
+    }
+
+    /* only bother applying these if we're in PWA mode */
+    @media (display-mode: window-controls-overlay) {
+        .frame.maximized .titlebar,
+        .frame.maximized .pwa-draggable {
+            height: env(titlebar-area-height, 2rem);
+            left: env(titlebar-area-x, 0);
+            top: env(titlebar-area-y, 0);
+        }
+
+        .frame.maximized .titlebar {
+            width: env(titlebar-area-width, 100vw);
+        }
+
+        .frame.maximized .pwa-draggable {
+            display: block;
+            position: absolute;
+            /* 2.5rem is the width of the buttons, and there's 2, so subtract 2 buttons' worth */
+            width: calc(env(titlebar-area-width, 100vw) - (2.5rem * 2));
+            -webkit-app-region: drag;
+        }
+
+        .buttons {
+            -webkit-app-region: no-drag;
+        }
     }
 </style>
