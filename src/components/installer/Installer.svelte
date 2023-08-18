@@ -6,11 +6,30 @@
 
 <script lang="ts">
     import { readyStore } from "../../webSocket";
+    import { openWindow } from "../../windows";
     import Heading from "../text/Heading.svelte";
+    import BraveModal from "./BraveModal.svelte";
     import Main from "./Main.svelte";
     import NoConnection from "./NoConnection.svelte";
 
     $: ready = $readyStore;
+
+    function onLoad() {
+        // @ts-ignore - brave is not defined in types
+        if (navigator?.brave !== undefined) {
+            // brave shields are enabled
+            openWindow(
+                BraveModal,
+                {},
+                {
+                    title: "Brave skill issue",
+                    width: 400,
+                    height: 215,
+                    maximizable: false
+                }
+            );
+        }
+    }
 </script>
 
 <main>
@@ -22,6 +41,8 @@
         <NoConnection />
     {/if}
 </main>
+
+<svelte:window on:load={onLoad} />
 
 <style>
     main {
